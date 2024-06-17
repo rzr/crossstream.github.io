@@ -11,4 +11,4 @@ jobs:
       - id: log
         run: echo "::set-output name=tag::$(git describe --tags --all)"
       - id: publish
-        gh release create steps.log.outputs.tag ${{ github.repository }}.zip -R https://github.com/${{ github.repository }}
+        run: gh release create steps.log.outputs.tag ${{ github.repository }}.zip -R https://github.com/${{ github.repository }}
