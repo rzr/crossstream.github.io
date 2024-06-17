@@ -1,0 +1,8 @@
+# YAML
+---
+- name: gh-describe
+  if: ghd
+  uses: proudust/gh-describe@v2.0.0
+- name: Check outputs
+  run: |
+    echo "describe  : ${{ steps.ghd.outputs.describe }}"
