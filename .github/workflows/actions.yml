@@ -1,8 +1,13 @@
 # YAML
 ---
-- name: gh-describe
-  if: ghd
-  uses: proudust/gh-describe@v2.0.0
-- name: Check outputs
-  run: |
-    echo "describe  : ${{ steps.ghd.outputs.describe }}"
+name: test-action
+on: [push]
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: log
+        run: echo "::set-output name=tag::$(git describe --tags --all)"
+      - id: publish
+        gh release create steps.log.outputs.tag ${{ github.repository }}.zip -R https://github.com/${{ github.repository }}
