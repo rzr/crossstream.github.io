@@ -1,0 +1,14 @@
+# YAML
+---
+name: download-action
+on:
+  pull_request:
+  push:
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - id: fetch
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: gh release download --repo https://github.com/CrossStream/crossstream-wip --pattern crossstream.txt
